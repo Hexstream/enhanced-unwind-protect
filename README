@@ -1,0 +1,9 @@
+Project's home: https://www.hexstreamsoft.com/libraries/enhanced-unwind-protect/
+
+
+enhanced-unwind-protect provides an enhanced UNWIND-PROTECT that makes it easy
+to detect whether the protected form performed a non-local exit or returned normally.
+
+
+This library is in the Public Domain.
+See the UNLICENSE file for details.

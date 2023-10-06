@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="canonical" href="https://www.hexstreamsoft.com/libraries/enhanced-unwind-protect/" />
+    <meta name="author" content="Jean-Philippe Paradis" />
+    <link rel="author" href="https://abc.hexstream.xyz/" />
+    <link rel="license" href="https://www.hexstreamsoft.com/UNLICENSE" />
+    <meta name="description" content="Provides an enhanced UNWIND-PROTECT that makes it easy to detect if the protected form performed a non-local exit or returned normally." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>enhanced-unwind-protect | Libraries | HexstreamSoft</title>
+    <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/global.css" />
+    <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/section-nav.css" />
+    <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/tags.css" />
+    <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/cl.css" />
+    <link rel="stylesheet" type="text/css" href="https://global.hexstream.dev/css/cl-definitions.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.hexstreamsoft.com/libraries/libraries.css" />
+    <link rel="preload" as="font" type="font/woff2" href="https://global.hexstream.dev/fonts/kaushan-script/KaushanScript-Regular.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="https://global.hexstream.dev/fonts/liberation/LiberationSerif-Regular.woff2" crossorigin />
+    <link rel="preload" as="image" type="image/svg+xml" href="https://global.hexstream.dev/non-free/images/logos/github.svg" />
+    <link rel="preload" as="image" type="image/svg+xml" href="https://global.hexstream.dev/images/logos/public-domain.svg" />
+    <link rel="preload" as="image" type="image/svg+xml" href="https://global.hexstream.dev/non-free/images/logos/quicklisp.svg" />
+    <script src="https://global.hexstream.dev/scripts/arrows-madness.mjs" type="module"></script>
+    <script src="https://www.hexstreamsoft.com/libraries/libraries.mjs" type="module"></script>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@HexstreamSoft" />
+    <meta name="twitter:title" content="enhanced-unwind-protect" />
+    <meta name="twitter:description" content="Provides an enhanced UNWIND-PROTECT that makes it easy to detect if the protected form performed a non-local exit or returned normally." />
+  </head>
+
+  <body>
+
+    <nav id="top-nav">
+
+      <div class="main">
+
+        <div class="breadcrumbs">
+          <a href="https://www.hexstreamsoft.com/">HexstreamSoft</a>
+          <span class="crumb"><span class="s"> » </span><a href="https://www.hexstreamsoft.com/libraries/">Libraries</a></span>
+          <span class="crumb"><span class="s"> » </span><a class="here">enhanced-unwind-protect</a></span>
+        </div>
+
+        <nav class="tabs" id="meta-nav">
+          <ul>
+            <li><a class="github" href="https://github.com/Hexstream/enhanced-unwind-protect"><span>See on GitHub</span></a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <p id="last-updated"><span>This page was last updated on </span><time datetime="2023-10-06">6 october 2023</time><span>.</span></p>
+
+    </nav>
+
+    <main>
+
+      <header id="page-header">
+        <h1>enhanced-unwind-protect</h1>
+      </header>
+
+      <div class="tags contains-groups">
+        <div class="group prominent">
+          <span class="tag hv license">
+            <span class="h">License<span>:</span></span>
+            <span class="v">Public Domain</span>
+          </span>
+          <span class="s">, </span>
+          <span class="tag hv quicklisp">
+            <span class="h">Load it with Quicklisp<span>:</span></span>
+            <code class="v">(ql:quickload "enhanced-unwind-protect")</code>
+          </span>
+        </div>
+        <div class="group">
+          <span class="tag hv">
+            <span class="h">Library type<span>:</span></span>
+            <span class="v">Wrapper macro</span>
+          </span>
+          <span class="s">, </span>
+          <span class="tag hv">
+            <span class="h">Project complexity<span>:</span></span>
+            <span class="v">Embarrassingly trivial</span>
+          </span>
+        </div>
+      </div>
+
+      <nav class="tabs" id="further-info">
+        <ul>
+          <li><a href="https://www.hexstreamsoft.com/libraries/releases/latest-versions/#enhanced-unwind-protect">Latest release</a></li>
+          <li><a href="https://www.hexstreamsoft.com/libraries/dependencies/#enhanced-unwind-protect">Dependencies</a></li>
+        </ul>
+        <ul>
+          <li><a href="https://www.hexstreamsoft.com/libraries/external-pages-xref/#enhanced-unwind-protect">External library pages</a></li>
+        </ul>
+      </nav>
+
+      <section id="introduction">
+
+        <p>
+          <dfn><code class="relevant">enhanced-unwind-protect</code></dfn> provides an enhanced <a href="http://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">unwind-protect</a> that makes it easy
+          <br />
+          to detect whether the protected form performed a non-local exit or returned normally.
+        </p>
+
+      </section>
+
+      <nav class="tabs">
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#dictionary">Dictionary</a></li>
+        </ul>
+      </nav>
+
+      <section id="overview">
+
+        <h1 class="breadcrumbs-bar">
+          <span class="section-relative-nav">
+            <a href="#overview" class="anchor">⚓</a>
+          </span>
+          <span class="breadcrumbs">
+            <a class="here">Overview</a>
+          </span>
+        </h1>
+
+        <p>There is a simple well-known pattern for detecting whether a form performed a non-local exit or returned normally, but calling this macro is more readable, concise, ergonomic and convenient.</p>
+
+        <p>
+          Distinguishing non-local exits from normal returns can be useful if you want to detect if some operation has "failed" or "succeeded".
+          <br />
+          You can't just detect if an error has been signaled, since there might be code upstream that knows how to recover from the error without unwinding the stack enough to trigger the <var>cleanup-forms</var>.
+        </p>
+
+      </section>
+
+      <section id="dictionary">
+
+        <h1 class="breadcrumbs-bar">
+          <span class="section-relative-nav">
+            <a href="#dictionary" class="anchor">⚓</a>
+          </span>
+          <span class="breadcrumbs">
+            <a class="here">Dictionary</a>
+          </span>
+        </h1>
+
+        <nav class="tabs">
+          <ul>
+            <li><a href="#dictionary_enhanced-unwind-protect"><span class="type">Package</span> <code>enhanced-unwind-protect</code></a></li>
+            <li><a href="#dictionary_unwind-protect"><span class="type">Macro</span> <code>unwind-protect</code></a></li>
+          </ul>
+        </nav>
+
+        <section id="dictionary_enhanced-unwind-protect">
+
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_enhanced-unwind-protect" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">enhanced-unwind-protect</a></span>
+            </span>
+          </h1>
+
+          <article class="package definition">
+
+            <h1><span class="type">Package</span> <span class="name self">enhanced-unwind-protect</span></h1>
+
+            <section class="description">
+              <h1>Description</h1>
+              <p>Simply <code>(:shadowing-import-from #:enhanced-unwind-protect #:<code class="relevant"><a href="#dictionary_unwind-protect">unwind-protect</a></code>)</code> from your <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank">defpackage</a>. Don't <code>(:use)</code>!</p>
+            </section>
+
+          </article>
+
+        </section>
+
+        <section id="dictionary_unwind-protect">
+
+          <h1 class="breadcrumbs-bar">
+            <span class="section-relative-nav">
+              <a href="#dictionary_unwind-protect" class="anchor">⚓</a>
+            </span>
+            <span class="breadcrumbs">
+              <a href="#dictionary">Dictionary</a>
+              <span class="crumb"><span class="s"> » </span><a class="here">unwind-protect</a></span>
+            </span>
+          </h1>
+
+          <article class="macro definition">
+
+            <h1><span class="type">Macro</span> <span class="name self">unwind-protect</span></h1>
+
+            <p class="args-and-retvals">(&amp;optional <var>abortp</var>) <var>protected-form</var> &amp;body <var>cleanup-forms</var> =&gt; <var>results</var></p>
+
+            <section class="arguments-and-values">
+              <h1>Arguments and Values</h1>
+              <ul>
+                <li><var>abortp</var> -- Not provided, <code>t</code>, <code>nil</code> or a symbol.</li>
+                <li><var>protected-form</var> -- A form.</li>
+                <li><var>cleanup-forms</var> -- An implicit progn.</li>
+                <li><var>results</var> -- The values of the <var>protected-form</var>.</li>
+
+              </ul>
+            </section>
+
+            <section class="description">
+              <h1>Description</h1>
+              <p>Directly expands to <code><a href="http://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">cl:unwind-protect</a></code>, with trivial variations depending on the <var>abortp</var> argument:</p>
+              <p>If <var>abortp</var> was not provided, just expand directly to <code><a href="http://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">cl:unwind-protect</a></code>.</p>
+              <p>If <var>abortp</var> is <code>t</code>, then <var>cleanup-forms</var> will be executed only if <var>protected-form</var> performed a non-local exit.</p>
+              <p>If <var>abortp</var> is <code>nil</code>, then <var>cleanup-forms</var> will be executed only if <var>protected-form</var> returned normally.</p>
+              <p>Else, <var>abortp</var> is a variable name, so <var>cleanup-forms</var> will be executed<br />with <var>abortp</var> bound to <code>t</code> if <var>protected-form</var> performed a non-local exit, or to <code>nil</code> if it returned normally.</p>
+            </section>
+
+          </article>
+
+        </section>
+
+        <nav class="end-of-section-indicator">
+          <a href="#dictionary">
+            "<span>Dictionary</span>" end.
+          </a>
+        </nav>
+
+      </section>
+
+    </main>
+
+    <footer id="footer">
+      <div class="back-to-top left">
+        <a href="#">⬆</a>
+      </div>
+      <div class="main">
+        <a href="https://validator.w3.org/check?uri=http%3A%2F%2Fwww.hexstreamsoft.com%2Flibraries%2Fenhanced-unwind-protect%2F">✔ HTML5</a>
+        <a href="https://www.hexstreamsoft.com/README">✔ Public Domain</a>
+        <a href="https://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Fwww.hexstreamsoft.com%2Flibraries%2Fenhanced-unwind-protect%2F">✔ CSS3</a>
+        <a>✔ Mobile-friendly</a>
+      </div>
+      <div class="back-to-top right">
+        <a href="#">⬆</a>
+      </div>
+    </footer>
+
+  </body>
+</html>
