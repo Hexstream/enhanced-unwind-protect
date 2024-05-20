@@ -99,7 +99,7 @@
       <section id="introduction">
 
         <p>
-          <dfn><code class="relevant">enhanced-unwind-protect</code></dfn> provides an enhanced <a href="http://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">unwind-protect</a> that makes it easy
+          <dfn><code class="relevant">enhanced-unwind-protect</code></dfn> provides an enhanced <a href="https://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">unwind-protect</a> that makes it easy
           <br />
           to detect whether the protected form performed a non-local exit or returned normally.
         </p>
@@ -170,7 +170,7 @@
 
             <section class="description">
               <h1>Description</h1>
-              <p>Simply <code>(:shadowing-import-from #:enhanced-unwind-protect #:<code class="relevant"><a href="#dictionary_unwind-protect">unwind-protect</a></code>)</code> from your <a href="http://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank">defpackage</a>. Don't <code>(:use)</code>!</p>
+              <p>Simply <code>(:shadowing-import-from #:enhanced-unwind-protect #:<code class="relevant"><a href="#dictionary_unwind-protect">unwind-protect</a></code>)</code> from your <a href="https://www.lispworks.com/documentation/HyperSpec/Body/m_defpkg.htm" target="_blank">defpackage</a>. Don't <code>(:use)</code>!</p>
             </section>
 
           </article>
@@ -208,8 +208,8 @@
 
             <section class="description">
               <h1>Description</h1>
-              <p>Directly expands to <code><a href="http://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">cl:unwind-protect</a></code>, with trivial variations depending on the <var>abortp</var> argument:</p>
-              <p>If <var>abortp</var> was not provided, just expand directly to <code><a href="http://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">cl:unwind-protect</a></code>.</p>
+              <p>Directly expands to <code><a href="https://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">cl:unwind-protect</a></code>, with trivial variations depending on the <var>abortp</var> argument:</p>
+              <p>If <var>abortp</var> was not provided, just expand directly to <code><a href="https://www.lispworks.com/documentation/HyperSpec/Body/s_unwind.htm" target="_blank">cl:unwind-protect</a></code>.</p>
               <p>If <var>abortp</var> is <code>t</code>, then <var>cleanup-forms</var> will be executed only if <var>protected-form</var> performed a non-local exit.</p>
               <p>If <var>abortp</var> is <code>nil</code>, then <var>cleanup-forms</var> will be executed only if <var>protected-form</var> returned normally.</p>
               <p>Else, <var>abortp</var> is a variable name, so <var>cleanup-forms</var> will be executed<br />with <var>abortp</var> bound to <code>t</code> if <var>protected-form</var> performed a non-local exit, or to <code>nil</code> if it returned normally.</p>
